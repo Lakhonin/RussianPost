@@ -6,7 +6,7 @@
 .NOTES      
    Name: Admins   
    Author: Aleksandr Lakhonin      
-   https://github.com/Lakhonin/Admins.psm1
+   https://github.com/Lakhonin/Admins/blob/master/Admins.psm1
 .EXAMPLE
    # Логинирование действий скрипта 
    Log "Пароль был изменен"
