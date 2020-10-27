@@ -258,3 +258,25 @@ try{$WmiBankLabel = (Get-WmiObject -ComputerName $ComputerName -Class Win32_Phys
     Log "Количесто ОЗУ           $($WmiSumRam1)gb"}
 catch{Log "$($Error[0].ToString())" -ErrorLogText}
 }
+Function Get-LastTimeBoot{
+<#
+.Synopsis
+   Вывод информации о времени с последней перезагрузки
+.DESCRIPTION
+   Показывает инофрмацию какой временной отрезок прошел с момента последней перезагрузки компьютера  
+.NOTES      
+   Name: General   
+   Author: Aleksandr Lakhonin      
+   https://github.com/Lakhonin/RussianPost/blob/master/ps/General.psm1
+.EXAMPLE
+   Get-LastTimeBoot -ComputerName localhost
+   [27.10.20][19:03:35][Информация] Время с последней перезагрузки = 5.20:34:47.2146392
+#>
+param
+([Parameter(Mandatory=$true)][String]$ComputerName)
+ try{$wmi=Get-WmiObject -Class win32_operatingsystem -ComputerName $ComputerName -EA 1
+    $boot=$wmi.ConvertToDateTime($wmi.LastBootUpTime)
+    log "Время с последней перезагрузки = $(((Get-Date)-$boot).ToString())"}
+catch{Log "LastTime"
+      Log "$($Error[0].ToString())"}
+}
